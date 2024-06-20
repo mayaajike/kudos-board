@@ -1,0 +1,65 @@
+.boards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+
+.kudos-board-container {
+    border: 2px solid black;
+    padding: 25px;
+    border-radius: 10px;
+    width: 180px;
+    height: 270px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-right: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f5f5f5;
+}
+
+.board-image {
+    width: 170px;
+    height: 80%;
+    align-self: center;
+    box-shadow: 5px 5px 5px 0px darkgrey;
+    margin-bottom: 10px;
+}
+
+.board-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 7px;
+    margin-bottom: 3px;
+}
+
+.board-type {
+    font-size: 15px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.board-buttons {
+    /* margin-right: 9px;s */
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.view-button,
+.delete-button {
+    background-color: lightgrey;
+    width: 70px;
+    margin-right: 8px;
+    text-align: center;
+    padding: 5px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+}
