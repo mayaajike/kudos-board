@@ -74,6 +74,20 @@ app.post('/boards', async (req, res) => {
     res.json(newBoard)
 })
 
+// SEARCH BOARDS TABLE
+app.post('/boards/search', async (req, res) => {
+    const { searchQuery } = req.body;
+    const results = await prisma.board.findMany({
+      where: {
+        name: {
+          contains: searchQuery,
+          mode: 'insensitive',
+        },
+      },
+    });
+    res.json(results);
+});
+
 
 // UPDATE BOARD AT BOARDS DIRECTORY
 app.put('/boards/:boardId', async (req, res) => {
@@ -117,6 +131,15 @@ app.delete('/boards/:boardId/delete', async (req, res) => {
     }
 
     try {
+        const board = await prisma.board.findUnique({
+            where: { id: parseInt(boardId) }
+        })
+
+        if (!board) {
+            res.status(404).json({ error: 'Board not found' })
+            return
+        }
+
         await prisma.card.deleteMany({
             where: { boardId: parseInt(boardId) }
         })
@@ -133,6 +156,8 @@ app.delete('/boards/:boardId/delete', async (req, res) => {
 })
 
 
+
+
 // CARD
 // CRUD => CREAD, READ, UPDATE, DELETE
 
@@ -142,7 +167,10 @@ app.get('/boards/:boardId/cards', async (req, res) => {
 
     try {
         const cards = await prisma.card.findMany({
-            where: { boardId: parseInt(boardId) }
+            where: { boardId: parseInt(boardId) },
+            orderBy: {
+                id: 'asc'
+            }
         })
         res.json(cards)
     } catch {
@@ -216,7 +244,7 @@ app.patch('/boards/:boardId/cards/:cardId', async (req, res) => {
 })
 
 // DELETE CARD
-app.delete('/boards/:boardId/cards/:cardId', async (req, res) => {
+app.delete('/boards/:boardId/cards/:cardId/delete', async (req, res) => {
     const { boardId, cardId } = req.params
 
     if (!boardId || !cardId) {
@@ -225,6 +253,14 @@ app.delete('/boards/:boardId/cards/:cardId', async (req, res) => {
     }
 
     try {
+        const card = await prisma.card.findUnique({
+            where: { id: parseInt(cardId) }
+        })
+
+        if (!card) {
+            res.status(404).json({ error: 'Card not found' })
+            return
+        }
         const deletedCard = await prisma.card.delete({
             where: { id: parseInt(cardId) }
         })

@@ -5,16 +5,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { MdOutlineArrowBackIos } from "react-icons/md";
 
 
-const Header = ({ isClicked, isPressed, toggleBoardModal, toggleCardModal }) => {
+const Header = ({ boards, setBoards, toggleBoardModal, toggleCardModal, searchResults, setSearchResults, searchQuery, setSearchQuery, handleSearch }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
     return (
         <>
             <header>
-                <MdOutlineArrowBackIos className="back-button" style={{ display: location.pathname !== '/boards' ? 'block' : 'none' }} onClick={() => navigate('/boards')}/>
+                <MdOutlineArrowBackIos className="back-button" style={{ display: location.pathname !== '/boards' ? 'block' : 'none' }} onClick={() => navigate(-1)}/>
                 <h1 className="title">Kudos Board</h1>
-                <SearchBar />
+                <SearchBar boards={boards} setBoards={setBoards} searchResults={searchResults} setSearchResults={setSearchResults}
+                searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>
                 <div className='header-buttons'>
                 <button id='all-button'>All</button>
                 <button id='recent-button'>Recents</button>

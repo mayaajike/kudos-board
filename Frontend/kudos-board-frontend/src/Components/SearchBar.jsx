@@ -1,11 +1,28 @@
 import React from 'react';
 import './SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({  setBoards, searchQuery, setSearchQuery, handleSearch, searchResults, setSearchResults }) => {
+
+    const handleChange = (event) => {
+        setSearchQuery(event.target.value);
+        if (event.target.value === '') {
+            setSearchResults([]);
+          }
+      };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        handleSearch(searchQuery).then(() => {
+            setBoards(searchResults);
+        }).catch((error) => {
+          console.error(error);
+        });
+      };
+
     return (
         <div>
-            <form className="searchForm">
-                <input type="text" placeholder='Search Boards...' id='search-bar'></input>
+            <form className="searchForm" onSubmit={handleSubmit} style={{ display: location.pathname === '/boards' ? 'block' : 'none' }}>
+                <input type="search" placeholder='Search Boards...' id='search-bar' value={searchQuery} onChange={handleChange} />
                 <button type="submit" id='search-button'>Search</button>
             </form>
         </div>
