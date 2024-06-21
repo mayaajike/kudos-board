@@ -28,7 +28,8 @@ const NewBoardModal = ({ toggleBoardModal, isClicked, setBoards, boards }) => {
           .then((response) => response.json())
           .then((data) => {
             console.log('Board created:', data);
-            setBoards([...boards, data]);
+            // setBoards([...boards, data]);
+            setBoards(prevBoards => [...prevBoards, data]);
           })
           .catch((error) => console.error('Error creating board:', error));
         setNewBoard({ name: '', image: '', category: '', authorName: '',});
@@ -85,7 +86,7 @@ const NewBoardModal = ({ toggleBoardModal, isClicked, setBoards, boards }) => {
                     <div className='board-form'>
                         <label htmlFor="image">Search Image: </label>
                         <input type='text' id="image" value={text} onChange={handleGiphyInput}/>
-                        <button id='image-search' onClick={handleGiphySubmit}>Search</button>
+                        <button id='image-search' type='button' onClick={handleGiphySubmit}>Search</button>
                         {results && <GiphyList gifs={results} onSelect={handleGifSelect}/> }
                         <input type='text' id='selected-gif' value={selectedGif} readOnly onChange={handleInputChange}/>
                     </div>

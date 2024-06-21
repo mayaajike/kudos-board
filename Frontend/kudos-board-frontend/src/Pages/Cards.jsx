@@ -7,9 +7,8 @@ import NewCardModal from '../Components/NewCardModal'
 import { useParams } from 'react-router-dom';
 
 
-const Cards = () => {
+const Cards = ({ cards, setCards }) => {
     const [isPressed, setIsPressed] = useState(false)
-    const [cards, setCards] = useState([]);
     const params = useParams();
     const boardId = params.boardId;
 
