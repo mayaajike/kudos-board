@@ -17,11 +17,7 @@ header {
     justify-content: center;
 }
 
-#all-button,
-#recent-button,
-#celebration-button,
-#thanks-button,
-#inspiration-button {
+.filter-button {
     border: 1px solid black;
     margin-right: 15px;
 }

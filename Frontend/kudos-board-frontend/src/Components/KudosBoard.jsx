@@ -3,7 +3,7 @@ import './KudosBoard.css';
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
-const KudosBoard = ({ boards, setBoards, searchResults, setSearchResults }) => {
+const KudosBoard = ({ boards, setBoards, searchResults, filterResults, setFilterResults }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -31,34 +31,30 @@ const KudosBoard = ({ boards, setBoards, searchResults, setSearchResults }) => {
     }
 
     const renderBoards = () => {
-        if (searchResults && searchResults.length > 0) {
-          return searchResults.map(board => (
-            <div key={board.id} className='kudos-board-container'>
-              <img src={board.image} className='board-image'/>
-              <p className='board-title'>{board.name}</p>
-              <p className='board-type'>{board.category}</p>
-              <div className='board-buttons'>
-                <button className='view-button' onClick={() => handleViewCard(board.id)}>View</button>
-                <button className='delete-button' onClick={() => handleDeleteBoard(board.id)}>Delete</button>
-              </div>
-            </div>
-          ));
-        } else {
-          return boards.map(board => (
-            <div key={board.id} className='kudos-board-container'>
-                <img src={board.image} className='board-image'/>
-                <p className='board-title'>{board.name}</p>
-                <p className='board-type'>{board.category}</p>
-                <div className='board-buttons'>
-                    <button className='view-button' onClick={() => handleViewCard(board.id)}>View</button>
-                    <button className='delete-button' onClick={() => handleDeleteBoard(board.id)}>Delete</button>
-                </div>
-            </div>
-        ));
-        }
-      };
+      let boardsToRender;
+      switch (true) {
+        case searchResults && searchResults.length > 0:
+          boardsToRender = searchResults;
+          break;
+        case filterResults && filterResults.length > 0:
+          boardsToRender = filterResults;
+          break;
+        default:
+          boardsToRender = boards;
+      }
 
-
+      return boardsToRender.map(board => (
+        <div key={board.id} className='kudos-board-container'>
+          <img src={board.image} className='board-image'/>
+          <p className='board-title'>{board.name}</p>
+          <p className='board-type'>{board.category}</p>
+          <div className='board-buttons'>
+            <button className='view-button' onClick={() => handleViewCard(board.id)}>View</button>
+            <button className='delete-button' onClick={() => handleDeleteBoard(board.id)}>Delete</button>
+          </div>
+        </div>
+      ));
+    };
 
     return (
         <div className="boards">

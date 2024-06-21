@@ -13,7 +13,6 @@ const SearchBar = ({  setBoards, searchQuery, setSearchQuery, handleSearch, sear
     const handleSubmit = (event) => {
         event.preventDefault();
         handleSearch(searchQuery).then(() => {
-            setBoards(searchResults);
         }).catch((error) => {
           console.error(error);
         });

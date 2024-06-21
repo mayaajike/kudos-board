@@ -7,6 +7,8 @@ import Footer from '../Components/Footer'
 
 function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResults, setSearchResults }) {
     const [isClicked, setIsClicked] = useState(false)
+    const [filter, setFilter] = useState('')
+    const [filterResults, setFilterResults] = useState([])
 
     const toggleBoardModal = () => {
         setIsClicked(!isClicked);
@@ -22,15 +24,23 @@ function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResult
         });
         const data = await response.json();
         setSearchResults(data);
-      };
+    };
+
+    const handleFilter = async (filter) => {
+        setFilter(filter);
+        const response = await fetch(`http://localhost:4500/boards/filter?filter=${filter}`);
+        const boards = await response.json();
+        setFilterResults(boards);
+    };
 
     return (
         <>
-            <Header isClicked={isClicked} toggleBoardModal={toggleBoardModal} boards={boards} setBoards={setBoards} handleSearch={handleSearch}
-            searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchResults={searchResults} setSearchResults={setSearchResults} />
+            <Header isClicked={isClicked} toggleBoardModal={toggleBoardModal} boards={boards} setBoards={setBoards} handleSearch={handleSearch} searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery} searchResults={searchResults} setSearchResults={setSearchResults} filter={filter} setFilter={setFilter} handleFilter={handleFilter}/>
 
             <main>
-                <KudosBoard boards={boards} setBoards={setBoards} searchResults={searchResults} setSearchResults={setSearchResults}/>
+                <KudosBoard boards={boards} setBoards={setBoards} searchResults={searchResults} setSearchResults={setSearchResults} filter={filter} setFilter={setFilter}
+                handleFilter={handleFilter} filterResults={filterResults} setFilterResults={setFilterResults}/>
                 <NewBoardModal toggleBoardModal={toggleBoardModal} isClicked={isClicked} setBoards={setBoards} boards={boards}/>
             </main>
 

@@ -88,6 +88,23 @@ app.post('/boards/search', async (req, res) => {
     res.json(results);
 });
 
+// FILTER BOARDS BY CATEGORY
+app.get('/boards/filter', async (req, res) => {
+    const search = req.query.filter.toString().toUpperCase();
+    if (search === 'ALL') {
+        const boards = await prisma.board.findMany();
+        res.json(boards)
+    } else {
+        const boards = await prisma.board.findMany({
+            where: {
+              category: search,
+            },
+          });
+          res.json(boards);
+    }
+
+ });
+
 
 // UPDATE BOARD AT BOARDS DIRECTORY
 app.put('/boards/:boardId', async (req, res) => {
