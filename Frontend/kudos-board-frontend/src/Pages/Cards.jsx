@@ -6,8 +6,7 @@ import { useState } from 'react'
 import NewCardModal from '../Components/NewCardModal'
 import { useParams } from 'react-router-dom';
 
-
-const Cards = ({ cards, setCards }) => {
+export default function Cards({ cards, setCards }) {
     const [isPressed, setIsPressed] = useState(false)
     const params = useParams();
     const boardId = params.boardId;
@@ -22,10 +21,7 @@ const Cards = ({ cards, setCards }) => {
                 <KudosCard cards={cards} setCards={setCards} boardId={boardId} />
                 <NewCardModal toggleCardModal={toggleCardModal} isPressed={isPressed} cards={cards} setCards={setCards} boardId={boardId}/>
             </main>
-            <footer><Footer /></footer>
-
+            <Footer />
         </div>
     )
 }
-
-export default Cards;

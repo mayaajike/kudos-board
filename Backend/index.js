@@ -15,15 +15,13 @@ app.listen(PORT, ()=> {
     console.log(`Server is running on http://www.localhost:${PORT}`)
 })
 
-// CRUD => CREATE, READ, UPDATE, DELETE
-
 // BOARD
-// READ FROM ROOT DIRECTORY
+// READ BOARD FROM ROOT DIRECTORY
 app.get('/', async (req, res) => {
     res.redirect('/boards')
 })
 
-// READ FROM BOARDS DIRECTORY
+// READ BOARD FROM BOARDS DIRECTORY
 app.get('/boards', async (req, res) => {
     const boards = await prisma.board.findMany()
     res.json(boards)
@@ -74,7 +72,7 @@ app.post('/boards', async (req, res) => {
     res.json(newBoard)
 })
 
-// SEARCH BOARDS TABLE
+// SEARCH BOARDS TABLE BY NAME
 app.post('/boards/search', async (req, res) => {
     const { searchQuery } = req.body;
     const results = await prisma.board.findMany({
@@ -102,9 +100,7 @@ app.get('/boards/filter', async (req, res) => {
         });
         res.json(boards);
     }
-
  });
-
 
 // UPDATE BOARD AT BOARDS DIRECTORY
 app.put('/boards/:boardId', async (req, res) => {
@@ -136,7 +132,6 @@ app.put('/boards/:boardId', async (req, res) => {
         res.status(500).json({ error: 'Failed to update board' })
     }
 })
-
 
 // DELETE BOARD AT BOARD DIRECTORY
 app.delete('/boards/:boardId/delete', async (req, res) => {
@@ -173,12 +168,8 @@ app.delete('/boards/:boardId/delete', async (req, res) => {
 })
 
 
-
-
 // CARD
-// CRUD => CREAD, READ, UPDATE, DELETE
-
-// READ FROM CARDS DIRECTORY
+// READ CARDS FROM CARDS DIRECTORY
 app.get('/boards/:boardId/cards', async (req, res) => {
     const { boardId } = req.params
 
@@ -248,7 +239,7 @@ app.put('/boards/:boardId/cards/:cardId', async (req, res) => {
     }
 })
 
-// PATCH CARD, UPDATE UPVOTE FIELD
+// PATCH CARD, INCREMENT UPVOTE FIELD
 app.patch('/boards/:boardId/cards/:cardId', async (req, res) => {
     const { boardId, cardId } = req.params
     const { upvote } = req.body

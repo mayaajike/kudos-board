@@ -4,8 +4,8 @@ import SearchBar from './SearchBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdOutlineArrowBackIos } from "react-icons/md";
 
-
-const Header = ({ boards, setBoards, toggleBoardModal, toggleCardModal, searchResults, setSearchResults, searchQuery, setSearchQuery, handleSearch, handleFilter }) => {
+export default function Header(props){
+    const { boards, setBoards, toggleBoardModal, toggleCardModal, searchResults, setSearchResults, searchQuery, setSearchQuery, handleSearch, handleFilter } = props;
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -30,5 +30,3 @@ const Header = ({ boards, setBoards, toggleBoardModal, toggleCardModal, searchRe
         </>
     )
 }
-
-export default Header;

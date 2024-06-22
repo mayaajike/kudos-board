@@ -1,7 +1,7 @@
 import '../CSS/DeleteCard.css'
 import { useNavigate } from 'react-router-dom'
 
-const DeleteCard = ({ handleDelete, boardId, cardId }) => {
+export default function DeleteCard({ handleDelete, boardId, cardId }) {
     const navigate = useNavigate();
     return (
         <>
@@ -16,5 +16,3 @@ const DeleteCard = ({ handleDelete, boardId, cardId }) => {
         </>
     )
 }
-
-export default DeleteCard;

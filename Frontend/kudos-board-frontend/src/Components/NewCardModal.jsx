@@ -2,7 +2,7 @@ import '../CSS/NewCardModal.css'
 import GiphyList from './GiphyList';
 import { useState } from 'react';
 
-const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) => {
+export default function NewCardModal ({ isPressed, toggleCardModal, boardId, cards, setCards }) {
     const apiKey = import.meta.env.VITE_API_KEY
     const [text, setText] = useState('')
     const [selectedGif, setSelectedGif] = useState('');
@@ -46,11 +46,6 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
 
     const handleGiphySubmit = (e) => {
         e.preventDefault();
-        if(text.length === 0){
-            console.log('length is 0, please enter text before submitting')
-            return
-        }
-
         const giphyApiCall = async () => {
             const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${text}&limit=10`;
 
@@ -60,7 +55,6 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
             const gifs = result.data.map((gif) => gif.images.original.url);
             setResults(gifs);
           };
-
         giphyApiCall()
         setText('')
     }
@@ -76,7 +70,6 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
                 <div className='card-modal-content'>
                 <span id='close-card-modal' onClick={toggleCardModal}>&times;</span>
                     <p className='card-modal-title'>Create a New Card</p>
-
                     <form className="new-card-form" onSubmit={handleSubmit}>
                         <div className='card-form'>
                             <label htmlFor='namee'>Title: </label>
@@ -96,5 +89,3 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
         </div>
     )
 }
-
-export default NewCardModal;

@@ -1,8 +1,7 @@
 import React from 'react';
 import '../CSS/SearchBar.css';
 
-const SearchBar = ({  setBoards, searchQuery, setSearchQuery, handleSearch, searchResults, setSearchResults }) => {
-
+export default function SearchBar({  setBoards, searchQuery, setSearchQuery, handleSearch, searchResults, setSearchResults }) {
     const handleChange = (event) => {
         setSearchQuery(event.target.value);
         if (event.target.value === '') {
@@ -27,5 +26,3 @@ const SearchBar = ({  setBoards, searchQuery, setSearchQuery, handleSearch, sear
         </div>
     )
 }
-
-export default SearchBar;

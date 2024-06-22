@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import DeleteCard from "../Components/DeleteCard";
 
-const DeleteCardPage = ({ setCards, cards}) => {
+export default function DeleteCardPage({ setCards, cards}) {
     const params = useParams();
     const boardId = params.boardId;
     const cardId = params.cardId;
@@ -39,5 +39,3 @@ const DeleteCardPage = ({ setCards, cards}) => {
         </>
     )
 }
-
-export default  DeleteCardPage;

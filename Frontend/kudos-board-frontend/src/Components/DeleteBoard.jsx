@@ -2,7 +2,7 @@ import '../CSS/DeleteBoard.css'
 import { useNavigate } from 'react-router-dom'
 
 
-const DeleteBoard = ({ handleDelete, boardId }) => {
+export default function DeleteBoard({ handleDelete, boardId }) {
     const navigate = useNavigate();
     return (
         <>
@@ -17,5 +17,3 @@ const DeleteBoard = ({ handleDelete, boardId }) => {
         </>
     )
 }
-
-export default DeleteBoard;

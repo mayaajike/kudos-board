@@ -5,9 +5,7 @@ import { CiFacebook } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 
-
-
-const Footer = () => {
+export default function Footer() {
     return (
         <footer>
             <div className='footer-container'>
@@ -31,5 +29,3 @@ const Footer = () => {
         </footer>
     )
 }
-
-export default Footer;

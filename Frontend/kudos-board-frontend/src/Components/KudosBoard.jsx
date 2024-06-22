@@ -3,7 +3,7 @@ import '../CSS//KudosBoard.css';
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
-const KudosBoard = ({ boards, setBoards, searchResults, filterResults, setFilterResults }) => {
+export default function KudosBoard({ boards, setBoards, searchResults, filterResults }) {
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -55,13 +55,7 @@ const KudosBoard = ({ boards, setBoards, searchResults, filterResults, setFilter
         </div>
       ));
     };
-
     return (
-        <div className="boards">
-             {renderBoards()}
-        </div>
-
+        <div className="boards">{renderBoards()}</div>
     )
 }
-
-export default KudosBoard;

@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import DeleteBoard from "../Components/DeleteBoard";
 import { useNavigate } from 'react-router-dom'
 
-
-const DeleteBoardPage = ({ boards, setBoards }) => {
+export default function DeleteBoardPage({ boards, setBoards }) {
     const params = useParams();
     const boardId = params.boardId;
     const navigate = useNavigate()
@@ -35,9 +34,7 @@ const DeleteBoardPage = ({ boards, setBoards }) => {
             <main>
                 <DeleteBoard style={{ display: location.pathname === `/boards/${boardId}/delete` ? 'block' : 'none' }} handleDelete={handleBoardDelete} boardId={boardId} />
             </main>
-            <footer><Footer /></footer>
+            <Footer />
         </>
     )
 }
-
-export default DeleteBoardPage;

@@ -5,7 +5,7 @@ import KudosBoard from '../Components/KudosBoard'
 import NewBoardModal from '../Components/NewBoardModal'
 import Footer from '../Components/Footer'
 
-function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResults, setSearchResults }) {
+export default function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResults, setSearchResults }) {
     const [isClicked, setIsClicked] = useState(false)
     const [filter, setFilter] = useState('')
     const [filterResults, setFilterResults] = useState([])
@@ -37,16 +37,12 @@ function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResult
         <>
             <Header isClicked={isClicked} toggleBoardModal={toggleBoardModal} boards={boards} setBoards={setBoards} handleSearch={handleSearch} searchQuery={searchQuery}
             setSearchQuery={setSearchQuery} searchResults={searchResults} setSearchResults={setSearchResults} filter={filter} setFilter={setFilter} handleFilter={handleFilter}/>
-
             <main>
                 <KudosBoard boards={boards} setBoards={setBoards} searchResults={searchResults} setSearchResults={setSearchResults} filter={filter} setFilter={setFilter}
                 handleFilter={handleFilter} filterResults={filterResults} setFilterResults={setFilterResults}/>
                 <NewBoardModal toggleBoardModal={toggleBoardModal} isClicked={isClicked} setBoards={setBoards} boards={boards}/>
             </main>
-
             <footer><Footer /></footer>
         </>
-        )
+    )
 }
-
-export default HomePage

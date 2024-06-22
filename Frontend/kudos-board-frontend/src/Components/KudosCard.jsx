@@ -4,13 +4,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-
-
-const KudosCard = ({ cards, setCards, boardId }) => {
+export default function KudosCard({ cards, setCards, boardId }) {
     const navigate = useNavigate();
     const [comments, setComments] = useState([])
     const [isClicked, setIsClicked] = useState(false)
-
 
     useEffect(() => {
         fetch(`http://localhost:4500/boards/${boardId}/cards`)
@@ -98,11 +95,6 @@ const KudosCard = ({ cards, setCards, boardId }) => {
     }
 
     return (
-        <div className='cards-container'>
-            {renderCards()}
-        </div>
-
+        <div className='cards-container'>{renderCards()}</div>
     )
 }
-
-export default KudosCard;
