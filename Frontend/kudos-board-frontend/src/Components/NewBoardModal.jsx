@@ -1,5 +1,5 @@
 import React from 'react';
-import './NewBoardModal.css';
+import '../CSS/NewBoardModal.css';
 import { useState } from 'react';
 import GiphyList from './GiphyList';
 
@@ -27,10 +27,13 @@ const NewBoardModal = ({ toggleBoardModal, isClicked, setBoards, boards }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Board created:', data);
-            // setBoards([...boards, data]);
-            setBoards(prevBoards => [...prevBoards, data]);
-          })
+            if (data.error) {
+                alert(data.error);
+              } else {
+                console.log('Board created:', data);
+                // setBoards([...boards, data]);
+                setBoards(prevBoards => [...prevBoards, data]);
+          }})
           .catch((error) => console.error('Error creating board:', error));
         setNewBoard({ name: '', image: '', category: '', authorName: '',});
         setText('');

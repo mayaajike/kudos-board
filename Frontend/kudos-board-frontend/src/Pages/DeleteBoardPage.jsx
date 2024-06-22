@@ -35,7 +35,7 @@ const DeleteBoardPage = ({ boards, setBoards }) => {
             <main>
                 <DeleteBoard style={{ display: location.pathname === `/boards/${boardId}/delete` ? 'block' : 'none' }} handleDelete={handleBoardDelete} boardId={boardId} />
             </main>
-            <Footer />
+            <footer><Footer /></footer>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import './DeleteCard.css'
+import '../CSS/DeleteCard.css'
 import { useNavigate } from 'react-router-dom'
 
 const DeleteCard = ({ handleDelete, boardId, cardId }) => {

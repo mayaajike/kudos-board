@@ -1,4 +1,4 @@
-import './NewCardModal.css'
+import '../CSS/NewCardModal.css'
 import GiphyList from './GiphyList';
 import { useState } from 'react';
 
@@ -23,9 +23,12 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Card created:', data);
-            setCards([...cards, data]);
-          })
+            if (data.error) {
+                alert(data.error);
+              } else {
+                console.log('Card created:', data);
+                setCards([...cards, data]);
+          }})
           .catch((error) => console.error('Error creating card:', error));
         setNewCard({ name: '', image: '' });
         setText('');
@@ -90,7 +93,6 @@ const NewCardModal = ({ isPressed, toggleCardModal, boardId, cards, setCards }) 
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.css';
+import '../CSS/Header.css';
 import SearchBar from './SearchBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdOutlineArrowBackIos } from "react-icons/md";

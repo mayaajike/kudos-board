@@ -1,5 +1,5 @@
 import React from 'react';
-import './KudosBoard.css';
+import '../CSS//KudosBoard.css';
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 

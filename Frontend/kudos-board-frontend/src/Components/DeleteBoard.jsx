@@ -1,4 +1,4 @@
-import './DeleteBoard.css'
+import '../CSS/DeleteBoard.css'
 import { useNavigate } from 'react-router-dom'
 
 

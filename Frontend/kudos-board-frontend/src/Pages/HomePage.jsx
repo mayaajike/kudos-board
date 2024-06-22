@@ -44,7 +44,7 @@ function HomePage({ boards, setBoards, searchQuery, setSearchQuery, searchResult
                 <NewBoardModal toggleBoardModal={toggleBoardModal} isClicked={isClicked} setBoards={setBoards} boards={boards}/>
             </main>
 
-            <Footer />
+            <footer><Footer /></footer>
         </>
         )
 }

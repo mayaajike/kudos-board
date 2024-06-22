@@ -35,7 +35,7 @@ const DeleteCardPage = ({ setCards, cards}) => {
             <main>
                 <DeleteCard style={{ display: location.pathname === `/boards/${boardId}/cards/${cardId}/delete` ? 'block' : 'none' }} handleDelete={handleCardDelete} boardId={boardId} cardId={cardId}/>
             </main>
-            <Footer />
+            <footer><Footer /></footer>
         </>
     )
 }

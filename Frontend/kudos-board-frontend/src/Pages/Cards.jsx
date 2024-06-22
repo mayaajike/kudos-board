@@ -22,7 +22,7 @@ const Cards = ({ cards, setCards }) => {
                 <KudosCard cards={cards} setCards={setCards} boardId={boardId} />
                 <NewCardModal toggleCardModal={toggleCardModal} isPressed={isPressed} cards={cards} setCards={setCards} boardId={boardId}/>
             </main>
-            <Footer />
+            <footer><Footer /></footer>
 
         </div>
     )

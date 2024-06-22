@@ -1,4 +1,4 @@
-import './GiphyList.css'
+import '../CSS/GiphyList.css'
 
 const GiphyList = ({ gifs, onSelect }) => {
     const items = gifs.map((item, index) => {

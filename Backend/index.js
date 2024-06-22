@@ -99,8 +99,8 @@ app.get('/boards/filter', async (req, res) => {
             where: {
               category: search,
             },
-          });
-          res.json(boards);
+        });
+        res.json(boards);
     }
 
  });
@@ -199,6 +199,19 @@ app.get('/boards/:boardId/cards', async (req, res) => {
 app.post('/boards/:boardId/cards', async (req, res) => {
     const { boardId } = req.params
     const { name, image } = req.body
+
+    if (!name || !image ) {
+        return res.status(400).json({ error: 'Please provide all required fields' });
+    }
+
+    if (typeof name !== 'string' || typeof image !== 'string') {
+        return res.status(400).json({ error: 'All fields must be strings' });
+    }
+
+    if (name.length < 2 ) {
+        return res.status(400).json({ error: 'Name and author name must be at least 2 characters' });
+    }
+
     const newCard = await prisma.card.create({
         data: {
             name,
@@ -287,6 +300,69 @@ app.delete('/boards/:boardId/cards/:cardId/delete', async (req, res) => {
     }
 })
 
+// GET COMMENTS FOR A CARD
+app.get('/boards/:boardId/cards/:cardId/comments', async (req, res) => {
+    const { boardId, cardId } = req.params
+
+    try {
+        const comments = await prisma.comment.findMany({
+            where: { cardId: parseInt(cardId) },
+            orderBy: {
+                id: 'asc'
+            }
+        })
+        res.json(comments)
+    } catch {
+        res.status(500).json({ error: 'Failed to fetch comments' })
+    }
+})
+
+// ADD NEW COMMENTS TO A CARD
+app.post('/boards/:boardId/cards/:cardId/comments', async (req, res) => {
+    const { boardId, cardId } = req.params
+    const { text, authorName } = req.body
+    let newComment;
+
+    if (!text || !authorName ) {
+        return res.status(400).json({ error: 'Please provide all required fields' });
+    }
+
+    if (typeof text !== 'string' || typeof authorName !== 'string') {
+        return res.status(400).json({ error: 'All fields must be strings' });
+    }
+
+    if (text.length < 2 ) {
+        return res.status(400).json({ error: 'Name and author name must be at least 2 characters' });
+    }
+
+    const existingAuthor = await prisma.author.findFirst({
+        where: { name: authorName }
+    })
+
+    if(existingAuthor) {
+        newComment = await prisma.comment.create({
+            data: {
+                text,
+                author: {
+                    connect: { id: existingAuthor.id }
+                },
+                card: {
+                    connect: { id: parseInt(cardId) }
+                },
+        }})
+    } else {
+        newComment = await prisma.comment.create({
+            data: {
+                text,
+                author: {
+                    create: { name: authorName }
+                },
+                card: {
+                    connect: { id: cardId}
+                }
+    }})}
+    res.json(newComment);
+})
 
 
 app.use((err, req, res, next) => {

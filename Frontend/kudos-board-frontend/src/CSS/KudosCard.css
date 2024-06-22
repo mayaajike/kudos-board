@@ -67,6 +67,12 @@
     padding-bottom: 8px;
     background-color: lightgrey;
 }
+.comments-button,
+.add-comment-button {
+    background-color: lightgrey;
+    margin-top: 6px;
+    padding: 6px;
+}
 .upvote-button{
     margin-right: 8px;
     width: 90px;
