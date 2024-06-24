@@ -274,7 +274,7 @@ app.delete('/boards/:boardId/cards/:cardId/delete', async (req, res) => {
     }
 
     try {
-        const card = await prisma.card.findUnique({
+            const card = await prisma.card.findUnique({
             where: { id: parseInt(cardId) }
         })
 
@@ -282,6 +282,10 @@ app.delete('/boards/:boardId/cards/:cardId/delete', async (req, res) => {
             res.status(404).json({ error: 'Card not found' })
             return
         }
+        // await prisma.commment.deleteMany({
+        //     where: { cardId: parseInt(cardId) }
+        // })
+
         const deletedCard = await prisma.card.delete({
             where: { id: parseInt(cardId) }
         })
