@@ -16,7 +16,7 @@ export default function Header(props){
                 <h1 className="title">Kudos Board</h1>
                 <SearchBar boards={boards} setBoards={setBoards} searchResults={searchResults} setSearchResults={setSearchResults}
                 searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>
-                <div className='header-buttons' style={{ display: location.pathname === '/boards' ? 'block' : 'none' }}>
+                <div className='header-buttons' style={{ display: location.pathname === '/' || location.pathname === '/boards' ? 'block' : 'none' }}>
                     <button className='filter-button' onClick={() => handleFilter('ALL')}>All</button>
                     <button className='filter-button' onClick={() => handleFilter('RECENT')}>Recents</button>
                     <button className='filter-button' onClick={() => handleFilter('CELEBRATION')}>Celebrations</button>
