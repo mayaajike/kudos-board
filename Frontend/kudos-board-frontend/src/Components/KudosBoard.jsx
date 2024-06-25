@@ -7,7 +7,7 @@ export default function KudosBoard({ boards, setBoards, searchResults, filterRes
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('http://localhost:4500/boards')
+        fetch('https://kudos-board-5e6k.onrender.com/boards')
         .then(response => {
             if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
