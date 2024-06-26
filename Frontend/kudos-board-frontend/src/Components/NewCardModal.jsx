@@ -10,34 +10,38 @@ export default function NewCardModal ({ isPressed, toggleCardModal, boardId, car
     const [newCard,setNewCard] = useState({
         name: '',
         image: '',
+        authorName: '',
     })
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const newCardWithDefaultAuthor = {
+            ...newCard,
+            authorName: newCard.authorName || 'Anonymous'
+          };
         fetch(`http://localhost:4500/boards/${boardId}/cards`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newCard),
+          body: JSON.stringify(newCardWithDefaultAuthor),
         })
           .then((response) => response.json())
           .then((data) => {
             if (data.error) {
                 alert(data.error);
               } else {
-                console.log('Card created:', data);
                 setCards([...cards, data]);
           }})
           .catch((error) => console.error('Error creating card:', error));
-        setNewCard({ name: '', image: '' });
+        setNewCard({ name: '', image: '' , authorName: ''});
         setText('');
         setSelectedGif('');
         setResults([]);
     };
 
     const handleInputChange = (event) => {
-        setNewCard({ ...newCard, [event.target.id]: event.target.value });
+        setNewCard((prevCard) => ({ ...prevCard, [event.target.id]: event.target.value }));
     };
 
     const handleGiphyInput = (e) => {
@@ -64,6 +68,10 @@ export default function NewCardModal ({ isPressed, toggleCardModal, boardId, car
         setSelectedGif(url);
     };
 
+    const handleAuthorChange = (event, cardName) => {
+        setAuthor((prevAuthors) => ({ ...prevAuthors, [cardName]: event.target.value }));
+    }
+
     return (
         <div>
             <div className='new-card-modal' style={{ display: isPressed ? 'flex' : 'none'}}>
@@ -72,7 +80,7 @@ export default function NewCardModal ({ isPressed, toggleCardModal, boardId, car
                     <p className='card-modal-title'>Create a New Card</p>
                     <form className="new-card-form" onSubmit={handleSubmit}>
                         <div className='card-form'>
-                            <label htmlFor='namee'>Title: </label>
+                            <label htmlFor='name'>Title: </label>
                             <input type='text' id="name" value={newCard.name} onChange={handleInputChange}/>
                         </div>
                         <div className='card-form'>
@@ -81,6 +89,10 @@ export default function NewCardModal ({ isPressed, toggleCardModal, boardId, car
                             <button type="button" id='image-search' onClick={handleGiphySubmit}>Search</button>
                             {results && <GiphyList gifs={results} onSelect={handleGifSelect}/> }
                             <input type='text' id='selected-gif' value={selectedGif} readOnly onChange={handleInputChange}/>
+                        </div>
+                        <div className='card-form'>
+                            <label htmlFor='authorName'>Author: </label>
+                            <input type='text' id="authorName" value={newCard.authorName} onChange={handleInputChange}/>
                         </div>
                         <button type='submit' id='card-submit-button' onClick={toggleCardModal}>Create New Card</button>
                     </form>

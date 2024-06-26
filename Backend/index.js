@@ -189,7 +189,7 @@ app.get('/boards/:boardId/cards', async (req, res) => {
 // CREATE NEW CARD
 app.post('/boards/:boardId/cards', async (req, res) => {
     const { boardId } = req.params
-    const { name, image } = req.body
+    const { name, image, authorName } = req.body
 
     if (!name || !image ) {
         return res.status(400).json({ error: 'Please provide all required fields' });
@@ -207,6 +207,7 @@ app.post('/boards/:boardId/cards', async (req, res) => {
         data: {
             name,
             image,
+            authorName,
             board: {
                 connect: { id: parseInt(boardId) }
             }

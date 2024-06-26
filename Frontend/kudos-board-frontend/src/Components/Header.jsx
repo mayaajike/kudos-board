@@ -23,7 +23,7 @@ export default function Header(props){
                     <button className='filter-button' onClick={() => handleFilter('THANK_YOU')}>Thank You</button>
                     <button className='filter-button' onClick={() => handleFilter('INSPIRATION')}>Inspirations</button>
                 </div>
-                <button id='create-new-board-button' style={{ display: location.pathname === '/boards' ? 'block' : 'none' }} onClick={toggleBoardModal}>Create a New Board</button>
+                <button id='create-new-board-button' style={{ display: location.pathname === '/' || location.pathname === '/boards' ? 'block' : 'none' }} onClick={toggleBoardModal}>Create a New Board</button>
                 <button id='create-new-card-button' style={{ display: location.pathname.match(/^\/boards\/\d+\/cards$/) !== null ? 'block' : 'none' }} onClick={toggleCardModal}>Create a New Card</button>
             </header>
 

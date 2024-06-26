@@ -16,7 +16,7 @@ export default function Cards({ cards, setCards }) {
     }
     return (
         <div>
-            <Header toggleCardModal={toggleCardModal} isPressed={isPressed}/>
+            <Header toggleCardModal={toggleCardModal} isPressed={isPressed} />
             <main>
                 <KudosCard cards={cards} setCards={setCards} boardId={boardId} />
                 <NewCardModal toggleCardModal={toggleCardModal} isPressed={isPressed} cards={cards} setCards={setCards} boardId={boardId}/>

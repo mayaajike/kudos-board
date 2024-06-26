@@ -34,9 +34,19 @@ model Card {
   id        Int     @id @default(autoincrement())
   name      String
   image     String
+  authorName   String @default("anonymous")
   upvote    Int     @default(0)
   board     Board   @relation(fields: [boardId], references:[id])
   boardId   Int
+  comments  Comment[]
+}
+
+model Comment {
+  id              Int     @id  @default(autoincrement())
+  description     String
+  author          String
+  card            Card    @relation(fields: [cardId], references:[id])
+  cardId          Int
 }
 
 enum Category{
